@@ -1,0 +1,11 @@
+const router = require('express').Router();
+const { asyncHandler: h } = require('../middleware/errorMiddleware');
+const auth = require('../middleware/authMiddleware');
+const c = require('../controllers/listingController');
+router.get('/', h(c.getAll));
+router.get('/:id', h(c.getOne));
+router.post('/', auth, h(c.create));
+router.put('/:id', auth, h(c.update));
+router.delete('/:id', auth, h(c.remove));
+router.put('/:id/status', auth, h(c.setStatus));
+module.exports = router;
